@@ -35,10 +35,10 @@ crud.createFile = (file, data) => { setTimeout( function createDelayed() {
             })
         }
     })
-}, 10000)
-};
+}, 
+10000)};
 
-// crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
+crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
 
@@ -51,10 +51,11 @@ crud.read = (file) => { setTimeout( function readDelayed() {
         console.log(data);
         
     })
-}, 10000)};
+    }, 
+10000)};
 
 
-crud.read('miguel');
+// crud.read('miguel');
 
 //UPDATE
 
@@ -75,18 +76,20 @@ crud.update = (file) => { setTimeout( function updateDelayed() {
                 }
             })
         })
-    }), 
-    10000};
+    }, 
+    10000)};
 
-crud.update('miguel');
+// crud.update('miguel');
 
-crud.read('miguel');
+// crud.read('miguel');
+
 //DELETE
-crud.delete = (file) => {
+crud.delete = (file) => { setTimeout( function deleteDelayed() {
     fs.unlink(`${ crud.baseDir }/${file}.txt`, (err) => {
         if (!err) console.log('deleted')
         else return err
     })
-}
+},
+10000)};
 
-// crud.delete('miguel');
+crud.delete('miguel');
