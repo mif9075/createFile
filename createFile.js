@@ -38,7 +38,7 @@ crud.createFile = (file, data) => { setTimeout( function createDelayed() {
 }, 10000)
 };
 
-crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
+// crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
 
@@ -58,7 +58,7 @@ crud.read('miguel');
 
 //UPDATE
 
-crud.update = (file) => {
+crud.update = (file) => { setTimeout( function updateDelayed() {
     readFile(`${ crud.baseDir }/${file}.txt`, 'utf8')
         .then(newStream => {
 
@@ -75,9 +75,10 @@ crud.update = (file) => {
                 }
             })
         })
-}
+    }), 
+    10000};
 
-// crud.update('miguel');
+crud.update('miguel');
 
 crud.read('miguel');
 //DELETE
