@@ -15,7 +15,7 @@ const crud  = {}
 crud.baseDir = path.join(__dirname, './database');
 
 //CREATE
-crud.createFile = (file, data) => {
+crud.createFile = (file, data) => { setTimeout( function createDelayed() {
     fs.open(`${ crud.baseDir }/${ file }.txt`, 'wx', (error, identifier) => {
         if (!error && identifier) {
             let jsonArray = [];
@@ -35,15 +35,16 @@ crud.createFile = (file, data) => {
             })
         }
     })
-}
+}, 10000)
+};
 
-// crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
+crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
 
 
 
-crud.read = (file) => { setTimeout( function readMe() {
+crud.read = (file) => { setTimeout( function readDelayed() {
     fs.readFile(`${ crud.baseDir }/${ file }.txt`, 'utf8', (error, data) =>  {
         if (error) throw error;
 
