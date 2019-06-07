@@ -1,3 +1,11 @@
+//MAIL
+let mailOptions = {
+    from: 'mferna@outlook.com',
+    to: 'yuri.shkoda@codeimmersives.com',
+    subject: '',
+    text: ''
+}
+
 //TIME
 let d = new Date();
 
@@ -38,7 +46,7 @@ crud.createFile = (file, data) => { setTimeout( function createDelayed() {
 }, 
 10000)};
 
-// crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
+crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
 
@@ -85,9 +93,14 @@ crud.update = (file) => { setTimeout( function updateDelayed() {
 
 //DELETE
 crud.delete = (file) => { setTimeout( function deleteDelayed() {
+    mailOptions.subject = `File ${file}.txt DELETED!`;
+    mailOptions.text = `File ${file}.txt DELETED!`;
     fs.unlink(`${ crud.baseDir }/${file}.txt`, (err) => {
-        if (!err) {console.log('deleted');
-        mail()}
+        if (!err)   { 
+            console.log('deleted');
+            mail(); 
+            
+                    }
         else return err
     })
 },
@@ -102,16 +115,11 @@ let transporter = nodemailer.createTransport({
     service: 'outlook',
     auth: {
         user: 'mferna@outlook.com', 
-        pass: '91KIlos$$$'
+        pass: ''
     }
 })
 
-let mailOptions = {
-    from: 'mferna@outlook.com',
-    to: 'mferna@outlook.com',
-    subject: `File {file}.txt DELETED!`,
-    text: `File {file}.txt DELETED!`
-}
+
 
 
 function mail(){ 
@@ -120,5 +128,3 @@ transporter.sendMail(mailOptions, function(err, info) {
     else        console.log(`Email sent: ${ info.response }`)
 })
 }
-
-// yuri.shkoda@codeimmersives.com
