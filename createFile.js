@@ -40,14 +40,18 @@ crud.createFile = (file, data) => {
 // crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
-crud.read = (file) => {
+
+
+
+crud.read = (file) => { setTimeout( function readMe() {
     fs.readFile(`${ crud.baseDir }/${ file }.txt`, 'utf8', (error, data) =>  {
         if (error) throw error;
 
         console.log(data);
         
     })
-};
+}, 10000)};
+
 
 crud.read('miguel');
 
@@ -72,7 +76,7 @@ crud.update = (file) => {
         })
 }
 
-crud.update('miguel');
+// crud.update('miguel');
 
 crud.read('miguel');
 //DELETE
