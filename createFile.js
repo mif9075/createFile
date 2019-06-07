@@ -38,7 +38,7 @@ crud.createFile = (file, data) => { setTimeout( function createDelayed() {
 }, 
 10000)};
 
-crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
+// crud.createFile('miguel', `date: ${d.toDateString()}, time: ${t}`);
 
 //READ
 
@@ -86,10 +86,39 @@ crud.update = (file) => { setTimeout( function updateDelayed() {
 //DELETE
 crud.delete = (file) => { setTimeout( function deleteDelayed() {
     fs.unlink(`${ crud.baseDir }/${file}.txt`, (err) => {
-        if (!err) console.log('deleted')
+        if (!err) {console.log('deleted');
+        mail()}
         else return err
     })
 },
 10000)};
 
 crud.delete('miguel');
+
+//Email
+const nodemailer = require('nodemailer');
+
+let transporter = nodemailer.createTransport({
+    service: 'outlook',
+    auth: {
+        user: 'mferna@outlook.com', 
+        pass: '91KIlos$$$'
+    }
+})
+
+let mailOptions = {
+    from: 'mferna@outlook.com',
+    to: 'mferna@outlook.com',
+    subject: `File {file}.txt DELETED!`,
+    text: `File {file}.txt DELETED!`
+}
+
+
+function mail(){ 
+transporter.sendMail(mailOptions, function(err, info) {
+    if (err)  console.log(err)
+    else        console.log(`Email sent: ${ info.response }`)
+})
+}
+
+// yuri.shkoda@codeimmersives.com
